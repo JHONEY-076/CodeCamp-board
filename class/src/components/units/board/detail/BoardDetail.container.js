@@ -2,11 +2,11 @@
     import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
     import{faCircleUser,faLink,faLocationDot,faThumbsUp,} from"@fortawesome/free-solid-svg-icons";
     import{faThumbsDown}from"@fortawesome/free-regular-svg-icons";
-    import { useQuery } from "@apollo/client";
+    import { useMutation, useQuery } from "@apollo/client";
     import { useRouter } from "next/router";
     import { useState } from "react";
     import BoardsDetailUI from "./BoardDetail.presenter";
-    import  {FETCH_BOARD} from "./BoardDetail.queries";
+    import  {DELETE_BOARD, FETCH_BOARD} from "./BoardDetail.queries";
     
    
     
@@ -16,8 +16,10 @@
 export default function BoardsDetail(){
 
     const router=useRouter()
-    console.log(router)
-    
+    const[deleteBoard]=useMutation(DELETE_BOARD)
+
+
+
     const{data}=useQuery(FETCH_BOARD,{
     variables:{boardId:router.query.boardId},
     });
@@ -40,6 +42,23 @@ export default function BoardsDetail(){
     setDislike(Dislike+1);
     }
 
+    const OnClickMoveToList=()=>{
+        router.push("/boards")
+    }
+
+    const onClickDelete=(event)=>{
+    deleteBoard({
+        variables:{
+            boardId:(event.target.id)
+        }
+    })
+    alert("해당 게시물을 삭제합니다");
+    
+    router.push("/boards")
+   
+    }
+
+
 return(
 
 
@@ -48,6 +67,8 @@ return(
 OnclickLike={OnclickLike}
 OnclickDisLike={OnclickDisLike}
 FontAwesomeIcon={FontAwesomeIcon}
+OnClickMoveToList={OnClickMoveToList}
+onClickDelete={onClickDelete}
 
 like={like}
 Dislike={Dislike}

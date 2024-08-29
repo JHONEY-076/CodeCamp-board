@@ -21,30 +21,21 @@ width:100%;
 height:350px;
 border: 1px solid black;
 display:flex;
-flex-direction: row;
+flex-direction: column;
 margin-bottom:50px;
 
 `
 
 export const BestBoardsWrapper=styled.div`
-width:282px;
+width:100%;
 height:257px;
 display:flex;
 flex-direction:column
 border: 1px solid black;
 border-radius: 15px;
 align-items:center;
-
-
 `
 
-export const BestTitle =styled.div`
-width:208px;
-height:42px;
-font-weight:300;
-
-
-`
 
 
 
@@ -88,10 +79,11 @@ border-radius:15px;
 
 export const listWrapper=styled.div`
 width:100%;
-height:662px;
-border-bottom:1px solid black;
+height:575px;
 margin-bottom:30px;
-
+margin-top:30px;
+border-top:1px solid black;
+border-bottom:1px solid black;
 `
 
 
@@ -153,6 +145,10 @@ height:52px;
 border-radius:15px;
 border:1px solid black;
 margin-left: 85%;
+cursor:pointer;
+  :hover{
+  background-color:yellow;
+  font-weight:200;
 `
 
 export const Page=styled.div`

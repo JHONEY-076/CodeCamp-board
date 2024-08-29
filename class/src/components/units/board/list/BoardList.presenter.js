@@ -1,29 +1,24 @@
 import *as S from "./BoardList.styles"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {getDate} from "../../../../commons/libraries/utils"
+import picture1 from "../../../../../public/img.png"
 
-
-export default function BoardsListUI(){
+export default function BoardsListUI(props){
 
 
 return (
 <S.Wrapper>
    
 <S.BestWrapper>
-    <S.BestTitle>베스트 게시글</S.BestTitle>
+    
+   
+    <S.BestBoardsWrapper>
+    
 
-<S.BestBoardsWrapper>
-    sda
-</S.BestBoardsWrapper>
-<S.BestBoardsWrapper>
-adas
-</S.BestBoardsWrapper>
-<S.BestBoardsWrapper>
-ada
-</S.BestBoardsWrapper>
-<S.BestBoardsWrapper>
-dada
-</S.BestBoardsWrapper>
+
+    </S.BestBoardsWrapper>
+
+
 </S.BestWrapper>
 
 <S.SearchWrapper>
@@ -39,16 +34,24 @@ dada
         <S.ColumnHeaderBasic>작성자</S.ColumnHeaderBasic>
         <S.ColumnHeaderBasic>날짜</S.ColumnHeaderBasic>
       </S.Row>
-    {}
-
-
-
+    {props.data?.fetchBoards.map(el=>(
+        
+        <S.Row key={el._id}>
+            <S.ColumnBasic>
+                {String(el._id).slice(-4).toUpperCase()}  {/* id의 맨 뒤의 4개만 잘라서 전부 대문자로 바꿔줌 */}
+            </S.ColumnBasic>
+            <S.ColumnTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
+                {el.title}
+            </S.ColumnTitle>
+            <S.ColumnBasic>{el.writer}</S.ColumnBasic>
+            <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>
+        </S.Row>
+    ))}
 </S.listWrapper>
 
 <S.Footer>
 
-  
-<S.Submitpage> ✏️ 게시글 등록하기</S.Submitpage>
+<S.Submitpage onClick={props.onClickMoveToBoardNew}> ✏️ 게시글 등록하기</S.Submitpage>
 
 
 

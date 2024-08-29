@@ -16,6 +16,7 @@ import{
     GoodButton,
     }from "./BoardDetail.styles"
 
+    import {getDate} from "../../../../commons/libraries/utils"
 
 
 export default function BoardsDetailUI(props){
@@ -28,7 +29,9 @@ return(
         <props.FontAwesomeIcon icon={props.faCircleUser} size="3x"/>
         <Profile>
         <Name>{props.data?.fetchBoard?.writer}</Name>
-        <Date>{props.data?.fetchBoard?.createdAt}</Date>
+        <Date>
+            {getDate(props.data?.fetchBoard?.createdAt)}
+        </Date>
         </Profile>
         <IconWrapper>
         <props.FontAwesomeIcon icon={props.faLink} size="2x"/>
@@ -59,9 +62,9 @@ return(
     </CardWrapper>
      
      <ButtonWrapper>
-        <Button>목록으로</Button>
+        <Button onClick={props.OnClickMoveToList}>목록으로</Button>
         <Button>수정하기</Button>
-        <Button>삭제하기</Button>
+        <Button id={props.data?.fetchBoard?._id} onClick={props.onClickDelete}>삭제하기</Button>
     </ButtonWrapper>
 
     </Wrapper>
